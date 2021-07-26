@@ -20,7 +20,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 100vh;
+  height: 200vh;
   width: 100vw;
   background-image: linear-gradient(
       to top,
