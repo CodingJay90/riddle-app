@@ -55,7 +55,17 @@
                 </div>
               </section>
               <section class="answer__box">
-                <h4>Selected Options</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Selected Options</h4>
+                  <div
+                    class="btn btn-secondary d-none btn-sm"
+                    style="margin-bottom: 3rem"
+                    id="reset"
+                    onclick="resetValues()"
+                  >
+                    reset
+                  </div>
+                </div>
                 <div class="answer">
                   <ul></ul>
                 </div>
@@ -82,6 +92,6 @@
       <footer></footer>
     </div>
     <script src="script.js" type="module"></script>
-    <script src="http://chancejs.com/chance.min.js"></script>
+    <script src="https://chancejs.com/chance.min.js"></script>
   </body>
 </html>

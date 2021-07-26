@@ -6,6 +6,7 @@ const riddleBox = document.querySelector(".question__box h3");
 const answerBox = document.querySelector(".answer__box ul");
 const optionsBox = document.querySelector(".options__box ul");
 const toastContainer = document.querySelector(".toast-container");
+const resetBtn = document.querySelector("#reset");
 
 const letters = [
   "A",
@@ -54,7 +55,7 @@ function animatePage() {
 function pickRandomRiddles() {
   const uniques = chance.unique(chance.natural, numOfRiddles, {
     min: 0,
-    max: 99,
+    max: 98,
   });
 
   uniques.forEach((i) => riddles.push(riddlesBank[i]));
@@ -66,6 +67,7 @@ function randomizeOptions(length, option) {
     min: 1,
     max: 25,
   }); //create unique numbers
+  console.log(option);
 
   uniques.forEach((item) => {
     for (let i = 0; i < option.length; i++) {
@@ -87,18 +89,22 @@ function randomizeOptions(length, option) {
 function compareAnswer() {
   const finalAnswer = selectedOptions.join("");
 
-  if (finalAnswer.toLowerCase() == correctAnswer.toLowerCase()) {
-    toastMessage("Got it Riddle Master");
+  if (
+    finalAnswer.toLowerCase() == correctAnswer.toLowerCase() &&
+    answerLength !== 0
+  ) {
+    toastMessage("Got it Riddle Master 👍👑", "success");
   } else {
-    toastMessage("Wrong answer! try again");
+    toastMessage("Wrong answer! try again 😂😅", "warning");
   }
+
+  resetValues();
 }
 
-function toastMessage(message) {
+function toastMessage(message, background) {
   const output = `
-        <div>
-            <p class="display-6 lead">${message}</p>
-            
+        <div class="alert alert-${background}" role="alert">
+            ${message}
         </div>
     `;
   toastContainer.innerHTML = output;
@@ -109,16 +115,23 @@ function toastMessage(message) {
 }
 
 window.resetValues = function resetValues() {
-  answerLength = 0;
-  correctAnswer = "";
+  //   answerLength = 0;
+  //   correctAnswer = "";
   numOfRiddles = 0;
   selectedOptions = [];
   optionsArray = [];
+
+  const arr = Array.from(answerBox.children); //reset selected options to emtpy
+  arr.forEach((i, index) => {
+    i.textContent = selectedOptions[index];
+  });
+  resetBtn.classList.add("d-none");
 };
 
 window.handleSelect = function handleSelect(e) {
   const letter = e.target.textContent;
   const options = answerBox.children;
+  resetBtn.classList.remove("d-none");
 
   if (selectedOptions.length !== answerLength) {
     selectedOptions.push(letter);
@@ -132,7 +145,6 @@ window.handleSelect = function handleSelect(e) {
 };
 
 window.handleNextRiddle = function handleNextRiddle(e) {
-  9;
   currentQuestionIndex = currentQuestionIndex + 1;
   if (currentQuestionIndex == riddles.length) e.disabled = true;
   if (currentQuestionIndex > 1)
@@ -153,8 +165,10 @@ window.handlePrevRiddle = function handlePrevRiddle(e) {
 };
 
 function displayRiddle(num) {
-  const optionLength = riddles[num].answer.length;
-  const answer = riddles[num].answer;
+  let answer = riddles[num].answer;
+  answer = answer.replace(/\s+/g, "");
+  const optionLength = answer.length;
+  console.log(answer);
   randomizeOptions(optionLength, answer); //call on the function to create options a user select from
   answerLength = optionLength;
   correctAnswer = answer;
@@ -186,7 +200,7 @@ const startGame = (e) => {
     displayRiddle(0);
   } else {
     // alert("please input a numeric value from 1 to 100");
-    toastMessage("please input a numeric value from 1 to 99");
+    toastMessage("please input a numeric value from 1 to 99", "danger");
   }
 };
 
