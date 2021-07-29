@@ -89,7 +89,7 @@ h4 {
 .options__box ul {
   list-style: none;
   display: grid;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   grid-template-columns: repeat(10, 1fr);
   grid-template-columns: repeat(auto-fit, 15%);
