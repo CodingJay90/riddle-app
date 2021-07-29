@@ -80,6 +80,9 @@ h4 {
 .answer__box li {
   background-color: slategrey;
   padding: 0.8rem 1rem;
+  min-width: 45px;
+  min-height: 45px;
+  text-align: center;
 }
 
 .options__box {
@@ -101,6 +104,9 @@ h4 {
   padding: 0.8rem 1rem;
   cursor: pointer;
   transition: background 0.14s linear;
+  min-width: 45px;
+  min-height: 45px;
+  text-align: center;
 }
 .options__box li:hover {
   background: #20949493;
