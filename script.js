@@ -139,8 +139,9 @@ window.handleSelect = function handleSelect(e) {
     arr.forEach((i, index) => {
       i.textContent = selectedOptions[index];
     });
-  } else {
-    compareAnswer();
+    if (selectedOptions.length == answerLength) {
+      compareAnswer();
+    }
   }
 };
 
